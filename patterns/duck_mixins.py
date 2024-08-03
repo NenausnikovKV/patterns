@@ -75,10 +75,3 @@ class RubberDuck(Duck):
     def display(self):
         """Показываем"""
         print("Резиновая утка")
-
-
-redhead_duck = RedheadDuck()
-redhead_duck.display()
-redhead_duck.quack()
-redhead_duck.swim()
-redhead_duck.fly()

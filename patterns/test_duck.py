@@ -1,4 +1,6 @@
 """ Вспоминаю как работает pytest """
+import pytest
+
 from patterns import duck
 from patterns import duck_mixins
 
@@ -25,9 +27,16 @@ class TestDuck:
         """Тест основного функционала RubberDuck"""
         rubber_duck = duck.RubberDuck()
         rubber_duck.display()
-        rubber_duck.quack()
         rubber_duck.swim()
-        rubber_duck.fly()
+
+
+    def test_rubber_duck_do_not_do(self):
+        """Тест, что не должна делать резиновая утка"""
+        rubber_duck = duck.RubberDuck()
+        with pytest.raises(AttributeError, match="object has no attribute 'quack'"):
+            rubber_duck.quack()
+        with pytest.raises(AttributeError, match="object has no attribute 'fly'"):
+            rubber_duck.fly()
 
 
 class TestDuckMixin:
@@ -48,8 +57,18 @@ class TestDuckMixin:
         redhead_duck.swim()
         redhead_duck.fly()
 
-    def test_rubber_duck(self):
+    def test_rubber_duck_do(self):
         """Тест основного функционала RubberDuck"""
         rubber_duck = duck_mixins.RubberDuck()
         rubber_duck.display()
         rubber_duck.swim()
+
+    # тест методов, которых н должно быть в классе
+    # noinspection PyUnresolvedReferences
+    def test_rubber_duck_do_not_do(self):
+        """Тест, что не должна делать резиновая утка"""
+        rubber_duck = duck_mixins.RubberDuck()
+        with pytest.raises(AttributeError, match="object has no attribute 'quack'"):
+            rubber_duck.quack()
+        with pytest.raises(AttributeError, match="object has no attribute 'fly'"):
+            rubber_duck.fly()
