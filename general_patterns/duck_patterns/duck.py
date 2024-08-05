@@ -8,7 +8,7 @@ from abc import abstractmethod
 
 class Duck:
     """
-    Бызовый класс для определиня уток
+    Базовый класс для определения уток
     """
     def __init__(self):
         pass
@@ -31,7 +31,6 @@ class Duck:
     @abstractmethod
     def display(self):
         """ show """
-        pass
 
 
 class MallardDuck(Duck):
@@ -54,7 +53,6 @@ class RubberDuck(Duck):
     """Резиновая утка"""
     def quack(self):
         """Не крякать"""
-        pass
 
     def display(self):
         """Показываем"""

@@ -68,7 +68,7 @@ ignored-modules=
 
 # Python code to execute, usually for sys.path manipulation such as
 # pygtk.require().
-#init-hook='import sys; sys.path.append(".");  sys.path.append("./testing")'
+init-hook='import sys; sys.path.append(".")'
 
 # Use multiple processes to speed up Pylint. Specifying 0 will auto-detect the
 # number of processors available to use, and will cap the count on Windows to
@@ -287,7 +287,7 @@ exclude-too-few-public-methods=
 
 # List of qualified class names to ignore when counting class parents (see
 # R0901)
-ignored-parents=
+ignored-parents=[]
 
 # Maximum number of arguments for function / method.
 max-args=5
@@ -317,7 +317,7 @@ max-returns=6
 max-statements=50
 
 # Minimum number of public methods for a class (see R0903).
-min-public-methods=2
+min-public-methods = 1
 
 
 [EXCEPTIONS]
