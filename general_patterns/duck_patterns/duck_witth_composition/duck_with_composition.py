@@ -5,8 +5,7 @@
 from abc import abstractmethod
 
 from general_patterns.duck_patterns.duck_exception import WrongDuckType
-from general_patterns.duck_patterns.duck_witth_composition.duck_mixins import FlyWithWingsMixin, QuackingMixin, FlyNoWay, \
-    FlyingInterface, QuackingInterface, MuteQuackMixin
+from general_patterns.duck_patterns.duck_witth_composition import duck_mixins
 
 
 class DuckFactory:
@@ -15,11 +14,11 @@ class DuckFactory:
     def get_duck(duck_name):
         """Определяем тип утки по имени"""
         if duck_name == "redhead_duck":
-            return RedheadDuck(fly_behavior=FlyWithWingsMixin(), quack_behavior=QuackingMixin())
+            return RedheadDuck(fly_behavior=duck_mixins.FlyWithWingsMixin(), quack_behavior=duck_mixins.QuackingMixin())
         if duck_name == "mallard_duck":
-            return MallardDuck(fly_behavior=FlyWithWingsMixin(), quack_behavior=QuackingMixin())
+            return MallardDuck(fly_behavior=duck_mixins.FlyWithWingsMixin(), quack_behavior=duck_mixins.QuackingMixin())
         if duck_name == "rubber_duck":
-            return RubberDuck(fly_behavior=FlyNoWay(), quack_behavior=MuteQuackMixin())
+            return RubberDuck(fly_behavior=duck_mixins.FlyNoWay(), quack_behavior=duck_mixins.MuteQuackMixin())
         raise WrongDuckType("Wrong duck type name")
 
 
@@ -28,8 +27,8 @@ class Duck:
     Базовый класс для определения уток
     """
     # В рамках обучения точечно оставлю подсказки типов для интерфейсов, реализующих часть инварианта.
-    fly_behavior: FlyingInterface
-    quack_behavior: QuackingInterface
+    fly_behavior: duck_mixins.FlyingInterface
+    quack_behavior: duck_mixins.QuackingInterface
 
     def __init__(self, fly_behavior, quack_behavior):
         self.fly_behavior = fly_behavior
