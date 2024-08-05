@@ -5,20 +5,29 @@
 from abc import abstractmethod
 
 from general_patterns.duck_patterns.duck_exception import WrongDuckType
-from general_patterns.duck_patterns.duck_witth_composition import duck_mixins
+from general_patterns.duck_patterns.duck_witth_composition import duck_mixins_with_interfaces
 
 
 class DuckFactory:
-    """Определяет какая утка нужна"""
+    """
+    Определяет какая утка нужна и возвращает экземпляр класса реализации
+    Если не одна не подходит, поднимает исключение WrongDuckType
+    """
     @staticmethod
     def get_duck(duck_name):
         """Определяем тип утки по имени"""
         if duck_name == "redhead_duck":
-            return RedheadDuck(fly_behavior=duck_mixins.FlyWithWingsMixin(), quack_behavior=duck_mixins.QuackingMixin())
+            fly_behavior = duck_mixins_with_interfaces.FlyWithWingsMixin()
+            quack_behavior = duck_mixins_with_interfaces.QuackingMixin()
+            return RedheadDuck(fly_behavior, quack_behavior)
         if duck_name == "mallard_duck":
-            return MallardDuck(fly_behavior=duck_mixins.FlyWithWingsMixin(), quack_behavior=duck_mixins.QuackingMixin())
+            fly_behavior = duck_mixins_with_interfaces.FlyWithWingsMixin()
+            quack_behavior = duck_mixins_with_interfaces.QuackingMixin()
+            return MallardDuck(fly_behavior, quack_behavior)
         if duck_name == "rubber_duck":
-            return RubberDuck(fly_behavior=duck_mixins.FlyNoWay(), quack_behavior=duck_mixins.MuteQuackMixin())
+            fly_behavior = duck_mixins_with_interfaces.FlyNoWay()
+            quack_behavior = duck_mixins_with_interfaces.MuteQuackMixin()
+            return RubberDuck(fly_behavior, quack_behavior)
         raise WrongDuckType("Wrong duck type name")
 
 
@@ -27,16 +36,30 @@ class Duck:
     Базовый класс для определения уток
     """
     # В рамках обучения точечно оставлю подсказки типов для интерфейсов, реализующих часть инварианта.
-    fly_behavior: duck_mixins.FlyingInterface
-    quack_behavior: duck_mixins.QuackingInterface
+    fly_behavior: duck_mixins_with_interfaces.FlyingInterface
+    quack_behavior: duck_mixins_with_interfaces.QuackingInterface
 
     def __init__(self, fly_behavior, quack_behavior):
         self.fly_behavior = fly_behavior
         self.quack_behavior = quack_behavior
 
+    def set_fly_behavior(self, new_fly_behavior):
+        """
+        Устанавливаем новое поведение для полета.
+        Позволяет динамически менять поведение у экземпляра класса.
+        """
+        self.fly_behavior = new_fly_behavior
+
     def perform_fly(self):
         """Выполнить полет классами композиции"""
         self.fly_behavior.fly()
+
+    def set_quack_behavior(self, new_quack_behavior):
+        """
+        Устанавливаем новое поведение для кваканья.
+        Позволяет динамически менять поведение у экземпляра класса.
+        """
+        self.quack_behavior = new_quack_behavior
 
     def perform_quack(self):
         """Выполнить кваканье классами композиции"""
