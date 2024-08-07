@@ -1,10 +1,13 @@
-""" Тестирование базового класса утки """
+"""
+Тестирование базового класса утки.
+Тестирование паттерна стратегия для поведения различных уток.
+"""
 import pytest
 
-from duck_patterns.duck_witth_composition.duck_mixins_with_interfaces import SqueakMixin
-from general_patterns.duck_patterns.duck_exception import WrongDuckType
-from general_patterns.duck_patterns.duck_witth_composition.duck_with_composition import DuckFactory, Duck
-from general_patterns.duck_patterns import duck, duck_mixins
+from general_patterns.duck_pattern_strategy.duck_witth_composition.duck_mixins_with_interfaces import SqueakMixin
+from general_patterns.duck_pattern_strategy.duck_exception import WrongDuckType
+from general_patterns.duck_pattern_strategy.duck_witth_composition.duck_with_composition import DuckFactory
+from general_patterns.duck_pattern_strategy import duck, duck_mixins
 
 
 class TestDuck:

@@ -4,8 +4,8 @@
 """
 from abc import abstractmethod
 
-from general_patterns.duck_patterns.duck_exception import WrongDuckType
-from general_patterns.duck_patterns.duck_witth_composition import duck_mixins_with_interfaces
+from general_patterns.duck_pattern_strategy.duck_exception import WrongDuckType
+from general_patterns.duck_pattern_strategy.duck_witth_composition import duck_mixins_with_interfaces
 
 
 class DuckFactory:
