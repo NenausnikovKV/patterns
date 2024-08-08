@@ -8,27 +8,6 @@ from general_patterns.duck_pattern_strategy.duck_exception import WrongDuckType
 from general_patterns.duck_pattern_strategy.duck_witth_composition import duck_mixins_with_interfaces
 
 
-class DuckFactory:
-    """
-    Определяет какая утка нужна и возвращает экземпляр класса реализации
-    Если не одна не подходит, поднимает исключение WrongDuckType
-    """
-    @staticmethod
-    def get_duck(duck_name):
-        """Определяем тип утки по имени"""
-        if duck_name == "redhead_duck":
-            fly_behavior = duck_mixins_with_interfaces.FlyWithWingsMixin()
-            quack_behavior = duck_mixins_with_interfaces.QuackingMixin()
-            return RedheadDuck(fly_behavior, quack_behavior)
-        if duck_name == "mallard_duck":
-            fly_behavior = duck_mixins_with_interfaces.FlyWithWingsMixin()
-            quack_behavior = duck_mixins_with_interfaces.QuackingMixin()
-            return MallardDuck(fly_behavior, quack_behavior)
-        if duck_name == "rubber_duck":
-            fly_behavior = duck_mixins_with_interfaces.FlyNoWay()
-            quack_behavior = duck_mixins_with_interfaces.MuteQuackMixin()
-            return RubberDuck(fly_behavior, quack_behavior)
-        raise WrongDuckType("Wrong duck type name")
 
 
 class Duck:
