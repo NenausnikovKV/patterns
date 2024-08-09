@@ -1,10 +1,9 @@
 """Магазин пиццы"""
 from abc import abstractmethod
 
-from general_patterns.pizza_fabric.pizza import NYStyleCheesePizza, NYStylePepperoniPizza, NYStyleClamPizza, \
-    NYStyleVeggiePizza, ChicagoStyleCheesePizza, ChicagoStylePepperoniPizza, ChicagoStyleClamPizza, \
-    ChicagoStyleVeggiePizza
+from general_patterns.pizza_fabric.pizza import CheesePizza, PepperoniPizza, ClamPizza, VeggiePizza
 from general_patterns.pizza_fabric.pizza_exception import WrongPizzaType
+from general_patterns.pizza_fabric.pizza_ingridient_fabrics import NYIngredientFactory
 
 
 class OldPizzaStore:
@@ -48,14 +47,19 @@ class NYStylePizzaStore(PizzaStore):
     """Пицца в нью-йоркском стиле"""
     def _create_pizza(self, pizza_type):
         """Определяет тип пиццы"""
+        pizza_ny_ingredient_factory = NYIngredientFactory()
         if pizza_type == "cheese":
-            pizza = NYStyleCheesePizza()
+            pizza = CheesePizza(pizza_ny_ingredient_factory)
+            pizza.name = "нью-йоркская сырная пицца"
         elif pizza_type == "pepperoni":
-            pizza = NYStylePepperoniPizza()
+            pizza = PepperoniPizza(pizza_ny_ingredient_factory)
+            pizza.name = "нью-йоркская пепперони пицца"
         elif pizza_type == "clam":
-            pizza = NYStyleClamPizza()
+            pizza = ClamPizza(pizza_ny_ingredient_factory)
+            pizza.name = "нью-йоркская пицца c морепродуктами"
         elif pizza_type == "veggie":
-            pizza = NYStyleVeggiePizza()
+            pizza = VeggiePizza(pizza_ny_ingredient_factory)
+            pizza.name = "нью-йоркская вегетарианская пицца"
         else:
             raise WrongPizzaType(f"Pizza type {pizza_type} does not exists")
         return pizza
@@ -65,14 +69,19 @@ class ChicagoStylePizzaStore(PizzaStore):
     """Пицца в Чикагском стиле"""
     def _create_pizza(self, pizza_type):
         """Определяет тип пиццы"""
+        pizza_ny_ingredient_factory = NYIngredientFactory()
         if pizza_type == "cheese":
-            pizza = ChicagoStyleCheesePizza()
+            pizza = CheesePizza(pizza_ny_ingredient_factory)
+            pizza.name = "чикагская сырная пицца"
         elif pizza_type == "pepperoni":
-            pizza = ChicagoStylePepperoniPizza()
+            pizza = PepperoniPizza(pizza_ny_ingredient_factory)
+            pizza.name = "чикагская пепперони пицца"
         elif pizza_type == "clam":
-            pizza = ChicagoStyleClamPizza()
+            pizza = ClamPizza(pizza_ny_ingredient_factory)
+            pizza.name = "чикагская пицца c морепродуктами"
         elif pizza_type == "veggie":
-            pizza = ChicagoStyleVeggiePizza()
+            pizza = VeggiePizza(pizza_ny_ingredient_factory)
+            pizza.name = "чикагская вегетарианская пицца"
         else:
             raise WrongPizzaType(f"Pizza type {pizza_type} does not exists")
         return pizza
