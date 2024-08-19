@@ -36,6 +36,7 @@ class TurkeyInterface(ABC):
 class WildTurkey(TurkeyInterface):
     """Wild turkey"""
 
+    # noinspection PyMethodMayBeStatic
     def gobble(self):
         """goble"""
         print("gobble gobble")
